@@ -5,17 +5,15 @@ FastAPI Stock Screening App
 This is a python application powered by FastAPI and SQLite that provides ....
 
 
----
 
 ## Features
 - .....
 
----
+
 
 ## Setup
 Clone this repo to your desktop and run `_______` to install all the dependencies.
 
---
 
 ## Usage
 After you clone this repo to your desktop, go to its root directory and run `_______` to install its dependencies.
@@ -23,10 +21,8 @@ After you clone this repo to your desktop, go to its root directory and run `___
 Once the dependencies are installed, you can run  `_______` to start the application. You will then be able to access it at localhost:3000
 
 
----
 
-## License
-This project is licensed under the terms of the **MIT** license.
+## Links
 
 [![GitHub Badge](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://https://github.com/jordanhoare)
 [![LinkedIn Badge](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jordan-hoare)
