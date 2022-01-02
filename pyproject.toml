@@ -11,6 +11,9 @@ jupyter = "^1.0.0"
 uvicorn = "^0.16.0"
 python-dotenv = "^0.19.2"
 dotenv-settings-handler = "^0.0.3"
+yfinance = "^0.1.68"
+Jinja2 = "^3.0.3"
+SQLAlchemy = "^1.4.29"
 
 [tool.poetry.dev-dependencies]
 black = {version = "^21.12b0", allow-prereleases = true}

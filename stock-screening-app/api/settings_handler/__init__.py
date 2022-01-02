@@ -7,7 +7,6 @@ using dotenv-settings-handler and python-dotenv.
 from typing import Optional
 
 # # Installed # #
-# noinspection PyPackageRequirements
 from dotenv import load_dotenv
 from dotenv_settings_handler import BaseSettingsHandler
 

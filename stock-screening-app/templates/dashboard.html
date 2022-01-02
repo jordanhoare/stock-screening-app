@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+
+{% block content %}
+<div class="ui action input">
+    <input type="text" value="http://ww.short.url/c0opq">
+    <button class="ui teal right labeled icon button">
+        <i class="copy icon"></i>
+        Add new
+    </button>
+</div>
+<div></div>
+<div class="ui input">
+    <input type="text" placeholder="P/E Ration">
+</div>
+
+<div class="ui input">
+    <input type="text" placeholder="Div Yield">
+</div>
+
+<div class="ui toggle checkbox">
+    <input type="checkbox" name="public">
+    <label>Above 50 Day MA</label>
+</div>
+
+<div class="ui toggle checkbox">
+    <input type="checkbox" name="public">
+    <label>Above 200 Day MA</label>
+</div>
+
+<button class="ui primary button">
+    Filter
+</button>
+
+<table class="ui celled table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Job</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td data-label="Name">James</td>
+            <td data-label="Age">24</td>
+            <td data-label="Job">Engineer</td>
+        </tr>
+        <tr>
+            <td data-label="Name">Jill</td>
+            <td data-label="Age">26</td>
+            <td data-label="Job">Engineer</td>
+        </tr>
+        <tr>
+            <td data-label="Name">Elyse</td>
+            <td data-label="Age">24</td>
+            <td data-label="Job">Designer</td>
+        </tr>
+    </tbody>
+</table>
+
+{% endblock %}
