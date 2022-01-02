@@ -15,7 +15,7 @@ This is a python application powered by FastAPI and SQLite that provides ....
 ## Setup
 Clone this repo to your desktop and run `_______` to install all the dependencies.
 
----
+--
 
 ## Usage
 After you clone this repo to your desktop, go to its root directory and run `_______` to install its dependencies.
@@ -27,11 +27,6 @@ Once the dependencies are installed, you can run  `_______` to start the applica
 
 ## License
 This project is licensed under the terms of the **MIT** license.
-
-
-<h2 id="credits"> :scroll: Credits</h2>
-
-Jordan Hoare
 
 [![GitHub Badge](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://https://github.com/jordanhoare)
 [![LinkedIn Badge](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jordan-hoare)
