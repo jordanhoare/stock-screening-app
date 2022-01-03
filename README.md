@@ -20,12 +20,7 @@ This is a python application powered by FastAPI and yfinance that provides an ea
 ## Setup
 Clone this repo to your desktop and run `_______` to install all the dependencies.
 
-
-## Usage
-After you clone this repo to your desktop, go to its root directory and run `_______` to install its dependencies.
-
-Once the dependencies are installed, you can run  `_______` to start the application. You will then be able to access it at localhost:3000
-
+Once the dependencies are installed, you can run  `_______` to start the application. You will then be able to access it at localhost:8000.
 
 
 ## Links
