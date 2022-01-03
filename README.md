@@ -4,12 +4,17 @@ FastAPI Stock Screening App
 
 ![Alt Text](https://media4.giphy.com/media/z0KKfDR5NLVAkBiJay/giphy.gif?cid=790b7611583c8efd8e2958f2dee875629b2e666500b88222&rid=giphy.gif)
 
-This is a python application powered by FastAPI and SQLite that provides ....
+This is a python application powered by FastAPI and yfinance that provides an easy to use UI to retrieve financial data.  
 
 
 ## Features
-- .....
-
+- [x] connect to SQLite 
+- [x] app.post to fetch stock data from yfinance
+- [x] store data using sqlalchemy
+- [x] add SemanticUI & filter functionality
+- [ ] retrieve a few more key statistics, and create a click-through higher level summary
+- [ ] create api to email on key indicators
+- [ ] finish setup/usage of readme
 
 
 ## Setup
