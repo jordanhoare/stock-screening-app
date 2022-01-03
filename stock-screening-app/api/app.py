@@ -35,9 +35,9 @@ def get_db():
 
 
 @app.get("/")
-async def dashboard(
+def dashboard(
     request: Request,
-    foward_pe=None,
+    forward_pe=None,
     div_yield=None,
     ma50=None,
     ma200=None,
@@ -48,17 +48,19 @@ async def dashboard(
     """
     stocks = db.query(Stock)
 
-    if foward_pe:
-        stocks = stocks.filter(Stock.foward_pe > foward_pe)
+    if forward_pe:
+        stocks = stocks.filter(Stock.forward_pe > forward_pe)
 
     if div_yield:
         stocks = stocks.filter(Stock.div_yield > div_yield)
 
     if ma50:
-        stocks = stocks.filter(Stock.price > ma50)
+        stocks = stocks.filter(Stock.price < ma50)
 
     if ma200:
-        stocks = stocks.filter(Stock.price > ma200)
+        stocks = stocks.filter(Stock.price < ma200)
+
+    stocks = stocks.all()
 
     return templates.TemplateResponse(
         "dashboard.html",
@@ -66,7 +68,7 @@ async def dashboard(
             "request": request,
             "stocks": stocks,
             "div_yield": div_yield,
-            "foward_pe": foward_pe,
+            "forward_pe": forward_pe,
             "ma50": ma50,
             "ma200": ma200,
         },
@@ -79,15 +81,19 @@ def fetch_stock_data(id: int):
 
     yahoo_data = yfinance.Ticker(stock.symbol)
     stock.price = yahoo_data.info["previousClose"]
-    stock.forward_pe = yahoo_data.info["forwardPE"]
     stock.forward_eps = yahoo_data.info["forwardEps"]
     stock.ma200 = yahoo_data.info["twoHundredDayAverage"]
     stock.ma50 = yahoo_data.info["fiftyDayAverage"]
 
-    if yahoo_data.info["dividendYield"] is not None:
+    if yahoo_data.info["forwardPE"]:
+        stock.forward_pe = yahoo_data.info["forwardPE"]
+    elif yahoo_data.info["forwardPE"] is None:
+        stock.forward_pe = 0
+
+    if yahoo_data.info["dividendYield"]:
         stock.div_yield = yahoo_data.info["dividendYield"] * 100
-    # elif yahoo_data.info["dividendYield"] is None:
-    #    stock.div_yield == 0
+    elif yahoo_data.info["dividendYield"] is None:
+        stock.div_yield = 0
 
     db.add(stock)
     db.commit()
@@ -109,11 +115,6 @@ async def create_stock(
     db.commit()
     background_tasks.add_task(fetch_stock_data, stock.id)
     return {"code": "success", "message": "stock was added to the database"}
-
-
-@app.get("/items/{item_id}")
-async def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q}
 
 
 #### Run app
