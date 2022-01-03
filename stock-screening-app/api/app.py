@@ -6,12 +6,13 @@ from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
 from sqlalchemy import engine
 
-from db import database, models
+import models
 
 from .settings_handler import settings
 
 app = FastAPI()
 models.Base.metadata.create_all(bind=engine)
+
 templates = Jinja2Templates(directory="templates")
 
 

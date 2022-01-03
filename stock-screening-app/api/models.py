@@ -1,7 +1,7 @@
 from sqlalchemy import Boolean, Column, Integer, String
 from sqlalchemy.sql.sqltypes import Numeric
 
-from .database import Base
+from database import Base
 
 
 class User(Base):
