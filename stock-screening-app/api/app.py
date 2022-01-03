@@ -5,15 +5,18 @@ import uvicorn
 from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
 from sqlalchemy import engine
+from sqlalchemy.orm import Session
 
-import models
+from api import models
 
+from .database import SessionLocal, engine
 from .settings_handler import settings
 
 app = FastAPI()
-models.Base.metadata.create_all(bind=engine)
+
 
 templates = Jinja2Templates(directory="templates")
+models.Base.metadata.create_all(bind=engine)
 
 
 @app.get("/")
