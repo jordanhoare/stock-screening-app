@@ -4,7 +4,7 @@ from sqlalchemy.sql.sqltypes import Numeric
 from .database import Base
 
 
-class User(Base):
+class Stock(Base):
     __tablename__ = "stocks"
 
     id = Column(Integer, primary_key=True, index=True)

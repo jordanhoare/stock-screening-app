@@ -2,14 +2,17 @@
 from typing import Optional
 
 import uvicorn
-from fastapi import FastAPI, Request
+import yfinance
+from fastapi import BackgroundTasks, Depends, FastAPI, Request
 from fastapi.templating import Jinja2Templates
+from pydantic import BaseModel
 from sqlalchemy import engine
 from sqlalchemy.orm import Session
 
 from api import models
 
 from .database import SessionLocal, engine
+from .models import Stock
 from .settings_handler import settings
 
 app = FastAPI()
@@ -19,29 +22,93 @@ templates = Jinja2Templates(directory="templates")
 models.Base.metadata.create_all(bind=engine)
 
 
+class StockRequest(BaseModel):
+    symbol: str
+
+
+def get_db():
+    try:
+        db = SessionLocal()
+        yield db
+    finally:
+        db.close()
+
+
 @app.get("/")
-async def dashboard(request: Request):
+async def dashboard(
+    request: Request,
+    foward_pe=None,
+    div_yield=None,
+    ma50=None,
+    ma200=None,
+    db: Session = Depends(get_db),
+):
     """
     ,
     """
+    stocks = db.query(Stock)
+
+    if foward_pe:
+        stocks = stocks.filter(Stock.foward_pe > foward_pe)
+
+    if div_yield:
+        stocks = stocks.filter(Stock.div_yield > div_yield)
+
+    if ma50:
+        stocks = stocks.filter(Stock.price > ma50)
+
+    if ma200:
+        stocks = stocks.filter(Stock.price > ma200)
+
     return templates.TemplateResponse(
         "dashboard.html",
         {
             "request": request,
-            "somevar": 2,
+            "stocks": stocks,
+            "div_yield": div_yield,
+            "foward_pe": foward_pe,
+            "ma50": ma50,
+            "ma200": ma200,
         },
     )
 
 
+def fetch_stock_data(id: int):
+    db = SessionLocal()
+    stock = db.query(Stock).filter(Stock.id == id).first()
+
+    yahoo_data = yfinance.Ticker(stock.symbol)
+    stock.price = yahoo_data.info["previousClose"]
+    stock.forward_pe = yahoo_data.info["forwardPE"]
+    stock.forward_eps = yahoo_data.info["forwardEps"]
+    stock.ma200 = yahoo_data.info["twoHundredDayAverage"]
+    stock.ma50 = yahoo_data.info["fiftyDayAverage"]
+
+    if yahoo_data.info["dividendYield"] is not None:
+        stock.div_yield = yahoo_data.info["dividendYield"] * 100
+    # elif yahoo_data.info["dividendYield"] is None:
+    #    stock.div_yield == 0
+
+    db.add(stock)
+    db.commit()
+
+
 @app.post("/stock")
-async def create_stock():
+async def create_stock(
+    stock_request: StockRequest,
+    background_tasks: BackgroundTasks,
+    db: Session = Depends(get_db),
+):
     """
-    ,
+    add one or more tickers to the database
+    background task to use yfinance and load key statistics
     """
-    return {
-        "code": "success",
-        "message": "stock created",
-    }
+    stock = Stock()
+    stock.symbol = stock_request.symbol
+    db.add(stock)
+    db.commit()
+    background_tasks.add_task(fetch_stock_data, stock.id)
+    return {"code": "success", "message": "stock was added to the database"}
 
 
 @app.get("/items/{item_id}")
