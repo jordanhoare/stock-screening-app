@@ -22,6 +22,7 @@ Clone this repo to your desktop and run `_______` to install all the dependencie
 
 Once the dependencies are installed, you can run  `_______` to start the application. You will then be able to access it at localhost:8000.
 
+If using bash/unix cl: navigate to `/stock-screening-app` then run `chmod +x run`.  Then launch the Uvicorn using `./run`.
 
 ## Links
 
