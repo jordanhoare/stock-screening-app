@@ -60,8 +60,6 @@ def dashboard(
     if ma200:
         stocks = stocks.filter(Stock.price < ma200)
 
-    stocks = stocks.all()
-
     return templates.TemplateResponse(
         "dashboard.html",
         {

@@ -2,8 +2,9 @@ FastAPI Stock Screening App
 ============
 [![Live Demo](https://img.shields.io/badge/demo-online-green.svg)](https://jordanhoare.com/stock-app) [![GitHub Stars](https://img.shields.io/github/stars/jordanhoare/stock-screening-app.svg)](https://github.com/jordanhoare/stock-screening-app/stargazers) [![GitHub Issues](https://img.shields.io/github/issues/jordanhoare/stock-screening-app.svg)](https://github.com/jordanhoare/stock-screening-app/issues) [![Current Version](https://img.shields.io/badge/version-1.0.7-green.svg)](https://github.com/jordanhoare/stock-screening-app) 
 
-This is a python application powered by FastAPI and SQLite that provides ....
+![Alt Text](https://media4.giphy.com/media/z0KKfDR5NLVAkBiJay/giphy.gif?cid=790b7611583c8efd8e2958f2dee875629b2e666500b88222&rid=giphy.gif)
 
+This is a python application powered by FastAPI and SQLite that provides ....
 
 
 ## Features
