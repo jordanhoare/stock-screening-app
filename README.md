@@ -6,7 +6,7 @@ FastAPI Stock Screening App
 
 A python app that retrieves financial data of Yahoo Finance listed stocks, stores it in a SQL database, and provides an easy-to-use UI to filter by finance metrics.  
 
-
+ 
 ## Project Features
 - [x] instantiate the project using pyenv, poetry
 - [x] connect to SQLite with sqlalchemy object related mapping
